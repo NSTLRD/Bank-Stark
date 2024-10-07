@@ -1,0 +1,62 @@
+spring:
+  config:
+    activate:
+      on-profile: test
+  application:
+    name: Bank Stark API
+  datasource:
+    url: jdbc:mysql://host.docker.internal:3306/bank_stark?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  mail:
+    host: localhost
+    port: 1025
+    username: admin
+    password: admin
+    properties:
+      mail:
+        smtp:
+          trust: "*"
+        auth: true
+        starttls:
+          enable: true
+        connection:
+          timeout: 5000
+          writetimeout: 5000
+  sql:
+    init:
+      mode: never
+  security:
+    user:
+      name: admin
+      password: admin
+    task:
+      scheduling:
+        pool:
+          size: 2
+
+security:
+  jwt:
+    secret-key: "RSjUBwnNFcjYzUFqFFDw1pCFbfZed5MC2QQVzs+CWeY="
+    expiration-time: 86400000
+mailing:
+  frontend:
+    activation:
+      activationUrl:  http://localhost:4200/activate-account
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+        web: DEBUG
+server:
+  port: 8009
